@@ -22,6 +22,23 @@ function renderTodoApp() {
     let app = document.querySelector("#app");
     let h1 = document.createElement("h1");
     let todoListElement = document.createElement("ul");
+    let buttonElement = document.querySelector("btn");
+    // let formElement = document.querySelector("#form");
+    let formInputElement = document.querySelector("#input");
+
+    function onButtonClick() {
+        todos.push({'description' : formInputElement.value})
+        console.log(todos)
+    }
+
+    // formElement.onsubmit = (e) => {
+    //     e.preventDefault()
+    //     formInputElement.value = " "
+
+    // }
+
+
+ 
 
     for (let i = 0; i < todos.length; i++) {
         let todoItems = todos[i]
@@ -39,11 +56,13 @@ function renderTodoApp() {
         todoListElement.innerHTML += todoMarkup;
 
     }
+    
 
 
     h1.innerText = "Todo List"
 
-    app.append(h1, todoListElement)
+    app.append(h1, todoListElement);
+    buttonElement.addEventListener("click", onButtonClick);
     // and maybe some here
 }
 
