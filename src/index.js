@@ -18,15 +18,48 @@ let todos = [
     }
 ];
 
+let app = document.querySelector("#app");
+let h1 = document.createElement("h1");
+let todoListElement = document.createElement("ul");
+let buttonElement = document.querySelector("#btn");
+let formElement = document.querySelector("#form");
+let formInputElement = document.querySelector("#input");
+
+function onButtonClick() {
+    todos.push({'completed': false , 'description': formInputElement.value })
+    console.log(todos)
+     todoListElement.innerHTML = "";
+    renderTodoApp()
+    
+}
+
+formElement.onsubmit = (e) => {
+    e.preventDefault()
+    formInputElement.value = " "
+}
+
+app.append(h1, todoListElement);
+
+
+
 function renderTodoApp() {
-    let app = document.querySelector("#app")
-    let h1 = document.createElement("h1")
-    // your code here
+    for (let i = 0; i < todos.length; i++) {
+        let todoItems = todos[i]
+        let stateOfCheckbox = todoItems.completed ? 'checked' : '';
+        let todoMarkup = `
+            <li class="list-item">
+                <input type="checkbox" ${stateOfCheckbox}/>
+                 ${todoItems.description}
+                </li>`
+        todoListElement.innerHTML += todoMarkup;
+    }
+
+
 
     h1.innerText = "Todo List"
-
-    app.appendChild(h1)
-    // and maybe some here
+    
 }
+
+buttonElement.addEventListener("click", onButtonClick);
 
 renderTodoApp()
